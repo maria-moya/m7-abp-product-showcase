@@ -20,7 +20,7 @@
               <RouterLink to="/" class="nav-link">Home</RouterLink>
               <RouterLink to="/about" class="nav-link">Nosotros</RouterLink>
               <RouterLink v-if="isAdmin" :to="{ name: 'crud-products' }" class="nav-link">Crud productos</RouterLink>
-              <RouterLink to="/favorites" class="nav-link">Favoritos</RouterLink>
+              <RouterLink v-if="isAuth" to="/favorites" class="nav-link">Favoritos</RouterLink>
               
               <template v-if="!isAuth">
                 <RouterLink to="/login" class="nav-link">Login</RouterLink>
