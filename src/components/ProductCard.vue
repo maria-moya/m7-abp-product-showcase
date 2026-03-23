@@ -3,6 +3,7 @@
 
     <div class="card h-100 shadow-sm position-relative">
       <button 
+        v-if="isAuth"
         class="btn position-absolute top-0 end-0 m-2 rounded-circle" 
         :class="isFav ? 'btn-danger' : 'btn-light'" 
         @click="favoritesStore.toggleFavorite(producto.id)">
@@ -27,11 +28,14 @@
 <script setup>
 import { computed } from 'vue'
 import { useFavoritesStore } from '@/stores/favorites.store'
+import { useUserStore } from '@/stores/user.store';
 
 const props = defineProps(["producto"]);
 const favoritesStore = useFavoritesStore();
+const userStore = useUserStore();
 
 const isFav = computed(() => favoritesStore.isFavorite(props.producto.id));
+const isAuth = computed(() => userStore.isAuthenticated);
 
 </script>
 
