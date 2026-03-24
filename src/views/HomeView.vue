@@ -38,15 +38,6 @@
           <p>Cantidad de productos: </p>
         </div>
 
-        <!-- <div
-          class="row justify-content-evenly g-3 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4"
-          v-if="listaFiltrada.length > 0"
-        >
-          <div class="col" v-for="producto in listaFiltrada">
-            <ProductCard :producto />
-          </div>
-        </div> -->
-
         <ProductList v-if="listaFiltrada.length > 0" :productos="listaFiltrada"/>
 
         <div v-if="productStore.isLoading" class="text-center py-5">
@@ -57,9 +48,6 @@
           {{ productStore.errorMsg }}
         </div>
 
-        <!-- <div v-else>
-          <p>No hay productos para mostrar.</p>
-        </div> -->
       </section>
     </main>
   </div>
