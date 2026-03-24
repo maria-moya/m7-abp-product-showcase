@@ -1,14 +1,55 @@
 <template>
   <div>
-    <HeaderComp>Página home</HeaderComp>
+    <HeaderComp>Catálogo de productos</HeaderComp>
 
-    <section>
+    <!-- <section>
       <v-container>
         <CarruselComp/>
       </v-container>
+    </section> -->
+
+    <section class="hero-section">
+      <CarruselComp/>
     </section>
 
-    <main class="container py-3">
+    <main class="container py-5">
+      <section>
+        <div class="text-center mb-5">
+          <h2 class="section-title">Nuestros productos</h2>
+          <hr class="mx-auto" style="width: 50px; border-top: 2px solid #333;">
+        </div>
+
+        <div class="d-flex justify-content-center flex-wrap gap-2 mb-4">
+          <RouterLink v-for="category in productStore.categories" :key="category" class="btn-category" :to="{name: 'category', params: {category}}">
+            {{ category }}
+          </RouterLink>
+        </div>
+
+        <div class="row justify-content-center mb-5">
+          <div class="col-md-6">
+            <div class="input-group input-group-sm">
+              <span class="input-group-text bg-transparent border-end-0">
+                <v-icon size="x-small">mid-magnify</v-icon>
+              </span>
+              <input type="text" class="form-control border-start-0 ps-0 shadow-none" placeholder="Buscar" v-model="filtro">
+            </div>
+          </div>
+        </div>
+
+        <ProductList v-if="listaFiltrada.length > 0" :productos="listaFiltrada"/>
+
+        <div v-if="productStore.isLoading" class="text-center py-5">
+          <v-progress-circular indeterminate color="grey-darken-1"></v-progress-circular>
+          <p class="mt-3 text-caption">Cargando catálogo...</p>
+        </div>
+        
+        <div v-else-if="productStore.errorMsg" class="alert alert-light border-danger text-center">
+          {{ productStore.errorMsg }}
+        </div>
+      </section>
+    </main>
+
+    <!-- <main class="container py-3">
       <section>
         <div class="d-flex justify-content-between">
           <h2 class="text-center">Nuestros productos</h2>
@@ -49,7 +90,8 @@
         </div>
 
       </section>
-    </main>
+    </main> -->
+
   </div>
 </template>
 
@@ -74,4 +116,32 @@ onMounted(async () => {
 })
 </script>
 
-<style scoped lang="css"></style>
+<style scoped lang="css">
+
+.section-title{
+  font-family: 'Outfit', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #444;
+}
+
+.btn-category{
+  text-decoration: none;
+  color: #666;
+  border: 1px solid #bbb;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+.btn-category:hover{
+  background-color: #f8f8f8;
+  border-color: #333;
+  color: #333;
+}
+
+.hero-section{
+  margin-top: -1px;
+}
+</style>
