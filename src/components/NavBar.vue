@@ -61,6 +61,7 @@
         <div class="d-flex gap-4 align-center">
           <RouterLink to="/" class="nav-link-custom">Inicio</RouterLink>
           <RouterLink to="/about" class="nav-link-custom">Nosotros</RouterLink>
+          <RouterLink to="/product" class="nav-link-custom">Productos</RouterLink>
           <RouterLink v-if="isAdmin" :to="{ name: 'crud-products' }" class="nav-link-custom">Crud productos</RouterLink>
           <RouterLink v-if="isAuth" to="/favorites" class="nav-link-custom ">Favoritos</RouterLink>
         </div>
