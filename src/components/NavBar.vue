@@ -80,14 +80,14 @@
           </template>
 
           <v-btn icon variant="text" density="comfortable">
-            <v-badge content="0" color="black" offset-x="3" offset-y="3">
+            <v-badge content="0" color="black" offset-x="-10" offset-y="-4">
               <v-icon size="small">mdi-cart-outline</v-icon>
             </v-badge>
           </v-btn>
 
           <v-btn icon variant="text" density="comfortable" @click="themeStore.toggleTheme()">
             <v-icon size="small">
-              {{ themeStore.isDarkMode ? 'mid-moon-waning-crescent' : 'mid-white-balance-sunny' }}
+              {{ themeStore.isDarkMode ? 'mdi-moon-waning-crescent' : 'mdi-white-balance-sunny' }}
             </v-icon>
           </v-btn>
         </div>
