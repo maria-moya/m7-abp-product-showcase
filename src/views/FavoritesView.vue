@@ -2,7 +2,7 @@
   <div>
 
     <div class="container py-5">
-      <h2 class="text-center mb-4">Mis Favoritos</h2>
+      <HeaderComp>Favoritos</HeaderComp>
       
       <div v-if="productosFavoritos.length > 0">
         <ProductList :productos="productosFavoritos" />
@@ -22,6 +22,8 @@ import { computed } from 'vue'
 import ProductList from '@/components/ProductList.vue'
 import { useProductsStore } from '@/stores/products.store'
 import { useFavoritesStore } from '@/stores/favorites.store'
+import HeaderComp from '@/components/HeaderComp.vue'
+
 
 const productsStore = useProductsStore()
 const favoritesStore = useFavoritesStore()
