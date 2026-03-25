@@ -13,6 +13,26 @@
     </section>
 
     <main class="container py-5">
+
+      <section class="novedades-container py-5">
+        <div class="Text-center mb-4">
+          <h2 class="section-title">Recien agregados</h2>
+        </div>
+
+        <div class="scroll-horizontal-container">
+          <div class="d-flex flex-nowrap gap-4 pb-4 px-3">
+            <div v-for="producto in ultimasNovedades" :key="producto.id" class="col-item">
+              <ProductCard :producto="producto"/>
+              <!-- <ProductList :productos="productosNuevos"/> -->
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-5">
+          <button class="btn btn-dark rounded-0 px-5 py-2 btn-ver-todo">Ver todo</button>
+        </div>
+      </section>
+
       <section>
         <div class="text-center mb-5">
           <h2 class="section-title">Nuestros productos</h2>
@@ -97,7 +117,7 @@
 
 <script setup>
 import HeaderComp from '@/components/HeaderComp.vue'
-//import ProductCard from '@/components/ProductCard.vue'
+import ProductCard from '@/components/ProductCard.vue';
 import ProductList from '@/components/ProductList.vue';
 import CarruselComp from '@/components/vuetify_comp/CarruselComp.vue';
 import { useProductsStore } from '@/stores/products.store'
@@ -114,6 +134,11 @@ const listaFiltrada = computed(() => {
 onMounted(async () => {
   await productStore.fetchProducts()
 })
+
+const ultimasNovedades = computed(() => {
+  return [...productStore.products].reverse().slice(0, 8);
+});
+
 </script>
 
 <style scoped lang="css">
@@ -123,6 +148,53 @@ onMounted(async () => {
   text-transform: uppercase;
   letter-spacing: 3px;
   color: #444;
+}
+
+.section-title-novedades {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+  letter-spacing: 2px;
+  font-size: 1.6rem;
+}
+
+.scroll-horizontal-container {
+  overflow-x: auto; 
+  scrollbar-width: thin; 
+  -webkit-overflow-scrolling: touch; 
+}
+
+.scroll-horizontal-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.scroll-horizontal-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.scroll-horizontal-container::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+.scroll-horizontal-container::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+.col-item {
+  flex: 0 0 auto;
+  width: 280px;
+}
+
+@media (max-width: 576px) {
+  .col-item {
+    width: 220px; 
+  }
+}
+
+.btn-ver-todo {
+  background-color: #222;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
 }
 
 .btn-category{
