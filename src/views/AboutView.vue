@@ -1,8 +1,12 @@
 <template>
   <div>
     <header-comp>Nuestra Historia</header-comp>
-
+    
     <v-container>
+      <div class="mb-5 ">
+        <BreadcrumbComp />
+      </div>
+
       <v-timeline side="end">
         <v-timeline-item v-for="item in items" :key="item.id" :dot-color="item.color" size="small">
           <v-alert :color="item.color" :icon="item.icon" :value="true">
@@ -16,6 +20,7 @@
 
 <script setup>
 import HeaderComp from '@/components/HeaderComp.vue'
+import BreadcrumbComp from '@/components/BreadcrumbComp.vue'
 
 const items = [
   {

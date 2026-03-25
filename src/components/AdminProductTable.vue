@@ -35,6 +35,7 @@
 <script setup>
 import { defineEmits } from 'vue';
 import { useProductsStore } from '@/stores/products.store.js'
+import BreadcrumbComp from './BreadcrumbComp.vue';
 
 const productsStore = useProductsStore();
 

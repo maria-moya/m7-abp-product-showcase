@@ -3,6 +3,10 @@
 
     <div class="container py-5">
       <HeaderComp>Favoritos</HeaderComp>
+
+      <div class="mb-5 py-4">
+        <BreadcrumbComp />
+      </div>
       
       <div v-if="productosFavoritos.length > 0">
         <ProductList :productos="productosFavoritos" />
@@ -23,6 +27,7 @@ import ProductList from '@/components/ProductList.vue'
 import { useProductsStore } from '@/stores/products.store'
 import { useFavoritesStore } from '@/stores/favorites.store'
 import HeaderComp from '@/components/HeaderComp.vue'
+import BreadcrumbComp from '@/components/BreadcrumbComp.vue'
 
 
 const productsStore = useProductsStore()

@@ -1,5 +1,9 @@
 <template>
   <div class="container mt-5">
+
+    <div class="mb-5">
+      <BreadcrumbComp />
+    </div>
     <div class="row justify-content-center">
       <div class="col-md-6">
         <div class="card p-4">
@@ -52,6 +56,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { register } from '../services/auth'
+import BreadcrumbComp from '@/components/BreadcrumbComp.vue'
 
 const router = useRouter()
 const firstname = ref('')

@@ -1,16 +1,19 @@
 <template>
-    <div>
-        <HeaderComp>Productos</HeaderComp>
+  <div>
+    <HeaderComp>Productos</HeaderComp>
 
-        <main class="container py-5">
-                  <section>
-        <div class="text-center mb-5">
-          <h2 class="section-title">Nuestros productos</h2>
-          <hr class="mx-auto" style="width: 50px; border-top: 2px solid #333;">
-        </div>
+    <main class="container py-4">
+      <section>
+        
+        <BreadcrumbComp/>
 
         <div class="d-flex justify-content-center flex-wrap gap-2 mb-4">
-          <RouterLink v-for="category in productStore.categories" :key="category" class="btn-category" :to="{name: 'category', params: {category}}">
+          <RouterLink
+            v-for="category in productStore.categories"
+            :key="category"
+            class="btn-category"
+            :to="{ name: 'category', params: { category } }"
+          >
             {{ category }}
           </RouterLink>
         </div>
@@ -21,36 +24,42 @@
               <span class="input-group-text bg-transparent border-end-0">
                 <v-icon size="x-small">mid-magnify</v-icon>
               </span>
-              <input type="text" class="form-control border-start-0 ps-0 shadow-none" placeholder="Buscar" v-model="filtro">
+              <input
+                type="text"
+                class="form-control border-start-0 ps-0 shadow-none"
+                placeholder="Buscar"
+                v-model="filtro"
+              />
             </div>
           </div>
         </div>
 
-        <ProductList v-if="listaFiltrada.length > 0" :productos="listaFiltrada"/>
+        <ProductList v-if="listaFiltrada.length > 0" :productos="listaFiltrada" />
 
         <div v-if="productStore.isLoading" class="text-center py-5">
           <v-progress-circular indeterminate color="grey-darken-1"></v-progress-circular>
           <p class="mt-3 text-caption">Cargando catálogo...</p>
         </div>
-        
+
         <div v-else-if="productStore.errorMsg" class="alert alert-light border-danger text-center">
           {{ productStore.errorMsg }}
         </div>
       </section>
-        </main>
-    </div>
+    </main>
+  </div>
 </template>
 
 <script setup>
+import BreadcrumbComp from '@/components/BreadcrumbComp.vue'
 import HeaderComp from '@/components/HeaderComp.vue'
-import ProductCard from '@/components/ProductCard.vue';
-import ProductList from '@/components/ProductList.vue';
+import ProductCard from '@/components/ProductCard.vue'
+import ProductList from '@/components/ProductList.vue'
 import { useProductsStore } from '@/stores/products.store'
 import { computed, onMounted, ref } from 'vue'
 
-const productStore = useProductsStore();
+const productStore = useProductsStore()
 
-const filtro = ref("");
+const filtro = ref('')
 
 const listaFiltrada = computed(() => {
   return productStore.productByName(filtro.value)
@@ -59,12 +68,10 @@ const listaFiltrada = computed(() => {
 onMounted(async () => {
   await productStore.fetchProducts()
 })
-
 </script>
 
 <style scoped lang="css">
-
-.btn-category{
+.btn-category {
   text-decoration: none;
   color: #666;
   border: 1px solid #bbb;
@@ -74,10 +81,9 @@ onMounted(async () => {
   transition: 0.3s;
 }
 
-.btn-category:hover{
+.btn-category:hover {
   background-color: #f8f8f8;
   border-color: #333;
   color: #333;
 }
-
 </style>

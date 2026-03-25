@@ -1,9 +1,11 @@
 <template>
-  <div>
-    <HeaderComp>Página CRUD Productos</HeaderComp>
+  <div class="mb-4">
+    <HeaderComp>CRUD Productos</HeaderComp>
   </div>
 
   <main class="container">
+    <BreadcrumbComp/>
+
     <section class="py-3">
       <form class="row justify-content-center w-50 mx-auto" @submit.prevent="createOrUpdate">
         <div class="col-12">
@@ -71,6 +73,7 @@ import { onMounted, ref } from 'vue'
 import { useProductsStore } from '@/stores/products.store.js'
 import ProductsList from '@/components/AdminProductTable.vue'
 import Swal from 'sweetalert2'
+import BreadcrumbComp from '@/components/BreadcrumbComp.vue'
 
 const productsStore = useProductsStore()
 
