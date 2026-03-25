@@ -1,21 +1,5 @@
 <template>
   <div class="carousel-wrapper">
-    <!-- <v-carousel show-arrows="hover" height="60vh" >
-      <v-carousel-item
-        src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-        cover
-      ></v-carousel-item>
-
-      <v-carousel-item
-        src="https://cdn.vuetifyjs.com/images/cards/hotel.jpg"
-        cover
-      ></v-carousel-item>
-
-      <v-carousel-item
-        src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-        cover
-      ></v-carousel-item>
-    </v-carousel> -->
   
     <v-carousel show-arrows="hover" height="75vh" hide-delimiter-background class="custom-carousel">
       <v-carousel-item v-for="(item, i) in items" :key="i" :src="item.src" cover>
@@ -23,7 +7,7 @@
           <div class="d-flex fill-height justify-center align-center">
             <div class="text-center text-container">
               <h2 class="carousel-text text-white">Nuevos productos</h2>
-              <v-btn variant="outlined" class="mt-4 px-10 btn-comprar btn-white-border">Comprar ahora</v-btn>
+              <v-btn variant="outlined" class="mt-4 px-13 btn-comprar btn-white-border text-decoration-none" to="/product">Comprar ahora</v-btn>
             </div>
           </div>
         </div>
@@ -90,20 +74,16 @@ const items = [
   border-color: #ffffff !important;
   color: #ffffff !important;
   border-radius: 4px !important; 
-  text-transform: lowercase;
+  text-transform: none;
   font-weight: 300;
-  letter-spacing: 1px;
+  letter-spacing: 3px;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
 }
 
-/* .btn-comprar{
-  border-color: #070707 !important;
-  color: #070707 !important;
-  border-radius: 4px !important;
-  text-transform: lowercase;
-  font-weight: 300;
-  letter-spacing: 1px;
-} */
+.btn-white-border:hover {
+  background-color: #ffffff !important;
+  color: black !important;
+}
 
 :deep(.v-window__controls .v-btn){
   border-radius: 50% !important;
