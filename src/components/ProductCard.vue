@@ -16,13 +16,14 @@
 
       <div class="card-content px-3 flex-grow-1 d-flex flex-column align-items-center">
         <span
+          v-if="isHomeView"
           @click="showQuickView = true"
           class="quick-view text-decoration-none text-muted small mb-2"
           role="button"
         >
           Vista rápida
         </span>
-        <!-- <a href="#" class="quick-view text-decoration-none text-muted small mb-2">Vista rápida</a> -->
+
         <h5 class="product-title fw-light mb-1">{{ producto.nombre }}</h5>
         <p class="product-price fw-normal">{{ producto.precio }}</p>
       </div>
@@ -132,6 +133,10 @@ const isProductView = computed(()=> {
   return ['product', 'category', 'favorites']. includes(route.name);
 });
 
+const isHomeView = computed(() => {
+  return route.name === 'home' || route.path === '/';
+});
+
 const showQuickView = ref(false)
 
 const isFav = computed(() => favoritesStore.isFavorite(props.producto.id))
@@ -175,7 +180,6 @@ watch(cantidad, (nuevoValor) => {
   width: 100%;
   height: auto;
   object-fit: contain;
-  /* aspect-ratio: 1 / 1.2; */
 }
 
 .product-title {
