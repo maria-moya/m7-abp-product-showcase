@@ -27,11 +27,12 @@
         <p class="product-price fw-normal">{{ producto.precio }}</p>
       </div>
 
-      <button class="btn btn-dark rounded-0 w-100 py-2 mb-2 mt-auto">
+      <button v-if="isProductView" class="btn btn-dark rounded-0 w-100 py-2 mb-2 mt-auto">
         <RouterLink :to="{ name: 'productDetail', params: { id: producto.id } }" class="text-white small text-decoration-none">
           Ver más
         </RouterLink>
       </button>
+
       <button class="btn btn-outline-dark rounded-0 w-100 py-2 mt-auto">Agregar al carrito</button>
     </div>
 
@@ -118,12 +119,18 @@
 
 <script setup>
 import { computed, ref, watch } from 'vue'
+import { useRoute } from 'vue-router' 
 import { useFavoritesStore } from '@/stores/favorites.store'
 import { useUserStore } from '@/stores/user.store'
 
 const props = defineProps(['producto'])
+const route = useRoute()
 const favoritesStore = useFavoritesStore()
 const userStore = useUserStore()
+
+const isProductView = computed(()=> {
+  return ['product', 'category', 'favorites']. includes(route.name);
+});
 
 const showQuickView = ref(false)
 
