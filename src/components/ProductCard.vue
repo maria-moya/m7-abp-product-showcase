@@ -28,13 +28,13 @@
         <p class="product-price fw-normal">{{ producto.precio }}</p>
       </div>
 
-      <button v-if="isProductView" class="btn btn-dark rounded-0 w-100 py-2 mb-2 mt-auto">
+      <button v-if="isProductView" class="btn btn-dark rounded-0 w-100 py-1 mb-2 mt-auto">
         <RouterLink :to="{ name: 'productDetail', params: { id: producto.id } }" class="text-white small text-decoration-none">
           Ver más
         </RouterLink>
       </button>
 
-      <button class="btn btn-outline-dark rounded-0 w-100 py-2 mt-auto">Agregar al carrito</button>
+      <button class="btn btn-outline-dark rounded-0 w-100 py-1 mt-auto">Agregar al carrito</button>
     </div>
 
     <v-dialog v-model="showQuickView" max-width="900">
@@ -169,6 +169,7 @@ watch(cantidad, (nuevoValor) => {
 .product-card {
   transition: transform 0.2s ease-in-out;
   background-color: #fff;
+  padding-bottom: 1rem;
 }
 
 .img-container {

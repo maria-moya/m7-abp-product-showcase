@@ -12,7 +12,7 @@
         <ProductList :productos="productosFavoritos" />
       </div>
       
-      <div v-else class="alert alert-secondary text-center">
+      <div v-else class="alert alert-secondary text-center text-estilo">
         <p class="mb-0">Aún no has agregado ningún producto a tus favoritos.</p>
         <RouterLink to="/" class="btn btn-primary mt-3">Volver al Catálogo</RouterLink>
       </div>
@@ -40,4 +40,9 @@ const productosFavoritos = computed(() => {
 })
 </script>
 
-<style scoped lang="css"></style>
+<style scoped lang="css">
+.text-estilo{
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: 1px;
+}
+</style>

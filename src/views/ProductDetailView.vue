@@ -17,7 +17,7 @@
 
                     <div class="col-md-5 col-lg-4 product-options-column">
                         <div class="mb-5 py-4">
-                            <h2 class="display-6 fw-light mb-2 text-dark">{{ product.nombre }}</h2>
+                            <h2 class="display-6 fw-light mb-2 text-dark text-estilo">{{ product.nombre }}</h2>
                             <p class="text-muted small mb-3">SKU: {{ product.id }}</p>
                             <p class="fs-2 mb-0">{{ formatPrice(product.precio) }}</p>
                         </div>
@@ -25,7 +25,7 @@
                         <div class="product-selection-block mb-5">
                             <div class="mb-4">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <label class="small text-uppercase fw-bold mb-0">Cantidad</label>
+                                    <label class="small text-uppercase fw-bold mb-0" >Cantidad</label>
                                     <span class="small" :class="quantityStatusClass">
                                         {{ product.stock > 0 ? `${product.stock} unidades disponibles` : 'Agotado' }}
                                     </span>
@@ -64,7 +64,7 @@
                     <div>
                         <v-expansion-panels>
                             <v-expansion-panel>
-                                <v-expansion-panel-title collapse-icon="mdi-minus" expand-icon="mdi-plus">
+                                <v-expansion-panel-title collapse-icon="mdi-minus" expand-icon="mdi-plus" class="text-title">
                                     Información del producto
                                 </v-expansion-panel-title>
                                 <v-expansion-panel-text>
@@ -92,25 +92,28 @@
   </div>
 </template>
 
+
 <script setup>
 import { computed, ref, watch, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useProductsStore } from '@/stores/products.store'
+import { useFavoritesStore } from '@/stores/favorites.store'
 import BreadcrumbComp from '@/components/BreadcrumbComp.vue'
 import HeaderComp from '@/components/HeaderComp.vue'
 
 const route = useRoute();
 const productsStore = useProductsStore();
+const favoritesStore = useFavoritesStore();
 
 const productId = route.params.id;
-
 const product = ref(null);
 
 const selectedColor = ref('');
 const selectedColorName = ref('');
 const selectedSize = ref(null);
 const quantity = ref(1);
-const isWishlisted = ref(false);
+
+const isWishlisted = computed(() => favoritesStore.isFavorite(productId));
 
 onMounted(async() => {
     if(productsStore.products.length === 0){
@@ -128,40 +131,6 @@ onMounted(async() => {
     }
 });
 
-// En un entorno real, obtendrías esto de un store o una API
-// const product = ref({
-//   id: '00003',
-//   sku: '00003',
-//   nombre: 'Soy un producto',
-//   precio: 19.99,
-//   imagen: 'https://via.placeholder.com/600x600', // URL de tu imagen
-//   imagenes: [
-//     'https://via.placeholder.com/600x600',
-//     'https://via.placeholder.com/200x200'
-//   ],
-//   colores: [
-//     { name: 'Blanco', code: '#fff' },
-//     { name: 'Gris', code: '#aaa' },
-//     { name: 'Negro', code: '#000' }
-//   ],
-//   tallas: ['S', 'M', 'L', 'XL'],
-//   stock: 12,
-//   descripcion_corta: 'Descripción del producto. Es el lugar ideal para agregar más información sobre tu producto.',
-//   accordionItems: [
-//     { title: 'INFORMACIÓN DEL PRODUCTO', content: 'Detalles completos sobre materiales, cuidado y origen.' },
-//     { title: 'POLÍTICA DE DEVOLUCIONES', content: 'Nuestra política de 30 días para cambios y devoluciones.' },
-//     { title: 'ENVÍO', content: 'Información sobre tiempos y costos de envío.' }
-//   ]
-// });
-
-// // Estado Reactivo de Selección
-// const selectedColor = ref(product.value.colores[0].code);
-// const selectedColorName = ref(product.value.colores[0].name);
-// const selectedSize = ref(null);
-// const quantity = ref(1);
-// const isWishlisted = ref(false);
-
-// Funciones de Cantidad con Lógica de Stock
 const increaseQuantity = () => {
   if (quantity.value < product.value.stock) quantity.value++;
 };
@@ -183,7 +152,6 @@ const quantityStatusClass = computed(() => {
   return product.value.stock < 5 ? 'text-warning' : 'text-muted';
 });
 
-// Validar input manual de cantidad
 watch(quantity, (newVal) => {
   if (newVal > product.value.stock) {
     quantity.value = product.value.stock;
@@ -192,8 +160,6 @@ watch(quantity, (newVal) => {
   }
 });
 
-
-// Acciones (simuladas)
 const addToCart = () => {
   console.log('Agregando al carrito:', {
     producto_id: product.value.id,
@@ -201,7 +167,6 @@ const addToCart = () => {
     color: selectedColorName.value,
     cantidad: quantity.value
   });
-  // Aquí llamarías a tu Cart Store
 };
 
 const buyNow = () => {
@@ -209,66 +174,36 @@ const buyNow = () => {
 };
 
 const toggleWishlist = () => {
-  isWishlisted.value = !isWishlisted.value;
+  favoritesStore.toggleFavorite(productId);
 };
+
 </script>
 
+
 <style scoped lang="css">
-/* GENERAL */
+
 .product-detail-page {
-  font-family: 'Montserrat', sans-serif; /* O la fuente que uses en tu proyecto */
+  font-family: 'Outfit', sans-serif; 
   color: #333;
+  text-transform: capitalize;
+  letter-spacing: 1px;
 }
 
-/* COLUMNA IZQUIERDA */
 .main-image-container {
-  background-color: #fcfcfc; /* Fondo muy claro para resaltar la imagen, como en la referencia */
+  background-color: #fcfcfc; 
   border: 1px solid #f0f0f0;
 }
 
-.thumbnail-container img {
-  width: 70px;
-  height: 70px;
-  object-fit: cover;
-  cursor: pointer;
-  border-radius: 0;
-  border: 1px solid transparent;
-}
-.thumbnail-container img:hover {
-  border-color: #ddd;
-}
-
-/* COLUMNA DERECHA */
 .product-options-column {
   padding-left: 1.5rem;
 }
 
-/* Opciones: Colores */
-.color-swatch {
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  border: 1px solid #ddd;
-  transition: transform 0.2s, border-color 0.2s;
-}
-.color-swatch:hover {
-  transform: scale(1.1);
-}
-.color-swatch.active {
-  border: 2px solid #000;
-  transform: scale(1.1);
+.text-title{
+  color: #555;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
 }
 
-/* Opciones: Tallas (Fixes de Vuetify para diseño minimalista) */
-.minimal-select :deep(.v-field__outline) {
-  --v-field-border-opacity: 0.15;
-  border-radius: 0; /* Bordes rectos */
-}
-.minimal-select :deep(.v-field--focused .v-field__outline) {
-  --v-field-border-opacity: 1;
-}
-
-/* Opciones: Cantidad */
 .quantity-selector .form-control {
   border-radius: 0;
 }
@@ -285,7 +220,6 @@ const toggleWishlist = () => {
   margin: 0;
 }
 
-/* Botones de Acción */
 .btn-dark {
   background-color: #000;
   border-radius: 0;
@@ -307,7 +241,7 @@ const toggleWishlist = () => {
 }
 
 .btn-purchase {
-  background-color: #dd4e24; /* El color naranja/ocre de tu referencia */
+  background-color: #dd4e24;
   color: white;
   border-radius: 0;
   transition: background-color 0.3s;
@@ -317,35 +251,8 @@ const toggleWishlist = () => {
   color: white;
 }
 .btn-purchase:disabled {
-  background-color: #f2a68c; /* Versión más pálida para deshabilitado */
+  background-color: #f2a68c;
   opacity: 1;
 }
 
-/* Acordeón de Detalles (Fixes de Vuetify para minimalismo) */
-.minimal-accordion :deep(.v-expansion-panel) {
-  background-color: transparent !important;
-  color: #333;
-}
-.minimal-accordion :deep(.v-expansion-panel-title) {
-  padding-left: 0;
-  padding-right: 0;
-  font-size: 0.85rem;
-  letter-spacing: 0.5px;
-  font-weight: normal;
-}
-.minimal-accordion :deep(.v-expansion-panel-text) {
-  padding-left: 0;
-  padding-right: 0;
-  font-size: 0.9rem;
-  color: #555;
-  line-height: 1.6;
-}
-.minimal-accordion :deep(.v-expansion-panel-text__wrapper) {
-  padding-left: 0;
-  padding-right: 0;
-  padding-bottom: 2rem;
-}
-.minimal-accordion :deep(.v-expansion-panel-title__icon) {
-  font-size: 0.7rem;
-}
 </style>
