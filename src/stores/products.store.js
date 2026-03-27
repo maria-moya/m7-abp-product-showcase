@@ -23,6 +23,10 @@ export const useProductsStore = defineStore('products', () => {
     };
   });
 
+  const getProductById = computed(() => {
+    return (id) => products.value.find(p => p.id === id);
+  });
+
   //ACCTIONS
   // function increment() {
   // count.value++
@@ -121,5 +125,5 @@ export const useProductsStore = defineStore('products', () => {
 
   
 
-  return { products, categories, isLoading, errorMsg, productByName, fetchProducts, createProduct, deleteProduct, updateProduct, productByCategory }
+  return { products, categories, isLoading, errorMsg, productByName, getProductById, fetchProducts, createProduct, deleteProduct, updateProduct, productByCategory }
 })

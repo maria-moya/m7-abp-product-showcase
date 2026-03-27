@@ -27,6 +27,11 @@
         <p class="product-price fw-normal">{{ producto.precio }}</p>
       </div>
 
+      <button class="btn btn-dark rounded-0 w-100 py-2 mb-2 mt-auto">
+        <RouterLink :to="{ name: 'productDetail', params: { id: producto.id } }" class="text-white small text-decoration-none">
+          Ver más
+        </RouterLink>
+      </button>
       <button class="btn btn-outline-dark rounded-0 w-100 py-2 mt-auto">Agregar al carrito</button>
     </div>
 
@@ -96,9 +101,13 @@
                 Producto temporalmente agotado.
               </div>
 
-              <button class="btn btn-dark w-100 rounded-0 py-3 mb-3">Agregar al carrito</button>
-
-              <a href="#" class="text-dark small text-decoration-underline">Ver más detalles</a>
+              <button class="btn btn-dark w-100 rounded-0 py-3 mb-3">
+                Agregar al carrito
+              </button>
+              
+              <RouterLink :to="{ name: 'productDetail', params: { id: producto.id } }" class="text-dark small text-decoration-underline">
+                Ver más detalle
+              </RouterLink>
             </div>
           </div>
         </div>

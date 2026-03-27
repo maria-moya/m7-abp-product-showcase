@@ -65,6 +65,12 @@ const router = createRouter({
       component: () => import('../views/FavoritesView.vue'),
       meta: { requiresAuth: true, breadcrumb: 'Favoritos' }
     },
+    {
+      path: '/producto/:id',
+      name: 'productDetail',
+      component: () => import('../views/ProductDetailView.vue'),
+      meta: { breadcrumb: 'Detalle producto' },
+    },
   ],
 })
 
