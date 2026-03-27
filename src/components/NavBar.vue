@@ -4,7 +4,7 @@
       <div class="container position-relative justify-content-center">
         
         <div class="position-absolute start-0 d-none d-md-block">
-          <v-btn icon="mdi-magnify" variant="text" density="confortable" color="grey-darken-1"></v-btn>
+          <v-btn icon="mdi-magnify" variant="text" density="comfortable" color="grey-darken-1"></v-btn>
         </div>
 
         <div class="d-flex gap-4 align-center">
