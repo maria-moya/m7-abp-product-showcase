@@ -23,8 +23,12 @@
           <td>{{ producto.stock }}</td>
           <td>{{ producto.precio }}</td>
           <td>
-            <button class="btn btn-warning" @click="emit('modoEdicion', producto.id )">Editar</button>
-            <button class="btn btn-danger ms-1" @click="eliminar(producto.id, producto.nombre)">Eliminar</button>
+            <button class="btn btn-warning" @click="emit('modoEdicion', producto.id)">
+              <i class="bi bi-pencil-square"></i>
+            </button>
+            <button class="btn btn-danger ms-1" @click="eliminar(producto.id, producto.nombre)">
+              <i class="bi bi-trash3"></i>
+            </button>
           </td>
         </tr>
       </tbody>
@@ -33,38 +37,69 @@
 </template>
 
 <script setup>
-import { defineEmits } from 'vue';
+import { defineEmits } from 'vue'
 import { useProductsStore } from '@/stores/products.store.js'
-import BreadcrumbComp from './BreadcrumbComp.vue';
+import Swal from 'sweetalert2'
 
-const productsStore = useProductsStore();
+const productsStore = useProductsStore()
 
-const emit = defineEmits(["modoEdicion"]);
+const emit = defineEmits(['modoEdicion'])
 
-defineProps(['productos']);
+defineProps(['productos'])
 
 const eliminar = async (id, nombre) => {
   try {
-    
-    if(confirm("Estás seguro que deseas elminar el producto: " + nombre)){
-      let respuesta = await productsStore.deleteProduct(id);
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger',
+        actions: 'gap-2',
+      },
+      buttonsStyling: false,
+    });
 
-      if(respuesta.error){
-        return alert(respuesta.error);
+    const result = await swalWithBootstrapButtons.fire({
+        title: `¿Estás seguro que deseas eliminar el producto ${nombre}`,
+        text: "¡No podrás revertir esta acción!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'No, cancelar!',
+        reverseButtons: true,
+      });
+
+      if (result.isConfirmed){
+        let respuesta = await productsStore.deleteProduct(id);
+
+        if(respuesta.success){
+          await swalWithBootstrapButtons.fire({
+            title: '¡Eliminado!',
+            text: respuesta.success || 'El producto ha sido borrado.',
+            icon: 'success',
+          });
+        } else {
+          await swalWithBootstrapButtons.fire({
+            title: 'Error',
+            text: respuesta.error || 'No se pudo eliminar el producto.',
+            icon: 'error',
+          });
+        }
+      }else if (result.dismiss === Swal.DismissReason.cancel){
+        swalWithBootstrapButtons.fire({
+          title: 'Cancelado',
+          text: 'Tu producto esta a salvo.',
+          icon: 'error',
+        });
       }
-
-      alert(respuesta.success);
-    }
-    
   } catch (error) {
-    console.log(error);
+    console.log("Error en la operación: ", error);
+    Swal.fire('Error', 'Ocurrió un fallo inesperado', 'error');
   }
 }
 </script>
 
 <style scoped>
-.table img{
-    width: 75px;
+.table img {
+  width: 75px;
 }
-
 </style>

@@ -55,8 +55,8 @@
       </form>
     </section>
 
-    <section class="py-3">
-      <h2 class="text-center">Listado de productos</h2>
+    <section class="py-4">
+      <h2 class="text-center mb-5 py-2">Listado de productos</h2>
       <ProductsList
         v-if="productsStore.products.length > 0"
         :productos="productsStore.products"
@@ -107,8 +107,14 @@ const create = async () => {
       return alert(respuesta.error)
     }
 
-    resetForm()
-    alert(respuesta.success)
+    resetForm();
+
+    Swal.fire({
+      title: respuesta.success,
+      icon: "success",
+      draggable: true
+    });
+    
   } catch (error) {
     console.log(error)
   }
@@ -133,7 +139,6 @@ const update = async () => {
     Swal.fire({
       title: 'estás seguro que deseas actualizar el producto?',
       showDenyButton: true,
-      //showCancelButton: true,
       confirmButtonText: 'Actualizar',
       denyButtonText: `No actualizar`,
     }).then(async(result) => {
@@ -177,4 +182,9 @@ onMounted(async () => {
 })
 </script>
 
-<style scoped lang="css"></style>
+<style scoped lang="css">
+main{
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: 1px;
+}
+</style>

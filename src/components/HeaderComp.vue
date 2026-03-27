@@ -1,11 +1,5 @@
 <template>
   <div>
-    <!-- <header>
-      <h1 class="text-center py-3">
-        <slot></slot>
-      </h1>
-    </header> -->
-
     <header class="header-container border-bottom bg-white">
       <div class="container text-center py-5">
         <h1 class="brand-title">
@@ -24,7 +18,6 @@
 .brand-title{
   font-family: 'Outfit', sans-serif;
   font-weight: 300;
-  /*text-transform: lowercase;*/
   letter-spacing: 8px;
   font-size: 2.8rem;
   color: #2c2c2c;

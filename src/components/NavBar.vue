@@ -1,56 +1,5 @@
 <template>
   <div>
-    <!-- <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container">
-        <a class="navbar-brand" href="#">Product ShowCase</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav ms-auto">
-            <div class="d-flex align-center ms-3">
-              <RouterLink to="/" class="nav-link">Home</RouterLink>
-              <RouterLink to="/about" class="nav-link">Nosotros</RouterLink>
-              <RouterLink v-if="isAdmin" :to="{ name: 'crud-products' }" class="nav-link">Crud productos</RouterLink>
-              <RouterLink v-if="isAuth" to="/favorites" class="nav-link">Favoritos</RouterLink>
-              
-              <template v-if="!isAuth">
-                <RouterLink to="/login" class="nav-link">Login</RouterLink>
-                <RouterLink to="/register" class="nav-link">Register</RouterLink>
-              </template>
-
-              <template v-else>
-                <span class="nav-link">Hola, {{ displayName }}</span>
-                <a class="nav-link" href="#" @click.prevent="onLogout">Logout</a>
-              </template>
-            </div>
-
-            <div class="d-flex align-center ms-3">
-              <v-switch
-                :model-value="themeStore.isDarkMode"
-                @update:model-value="themeStore.toggleTheme()"
-                color="primary"
-                hide-details
-                class="mt-0 pt-0"
-              ></v-switch>
-              <span class="ms-2 text-nowrap" style="margin-bottom: 2px;">
-                {{ themeStore.isDarkMode ? '🌙 Oscuro' : '☀️ Claro' }}
-              </span>
-            </div>
-            
-          </div>
-        </div>
-      </div>
-    </nav> -->
-  
     <nav class="navbar navbar-expand-lg navbar-light bg-withe sticky-top py-3">
       <div class="container position-relative justify-content-center">
         

@@ -6,8 +6,8 @@ import { db } from '@/firebaseConfig.js'
 
 export const useProductsStore = defineStore('products', () => {
   //ESTADOS
+  
   const products = ref([])
-
   const categories = ref (['Hogar', 'Cocina', 'Jardin']);
 
   //GETTERS
@@ -26,11 +26,6 @@ export const useProductsStore = defineStore('products', () => {
   const getProductById = computed(() => {
     return (id) => products.value.find(p => p.id === id);
   });
-
-  //ACCTIONS
-  // function increment() {
-  // count.value++
-  // }
 
   const productByCategory = (category) => {
     return products.value.filter(p => p.categoria == category);
@@ -55,9 +50,8 @@ export const useProductsStore = defineStore('products', () => {
       return { success: 'Productos obtenidos correctamente.' }
       
     } catch (error) {
-      //console.log(error)
       errorMsg.value = 'No se puedieron cargar los productos';
-      //return { error: 'Algo ha salido mal al intentar leer los productos.' }
+     
     } finally {
       isLoading.value = false;
     }
@@ -74,7 +68,7 @@ export const useProductsStore = defineStore('products', () => {
 
       products.value.push({ id: docRef.id, ...producto });
 
-      return {success: `Producto creado con id: ${docRef.id}`};
+      return {success: `Se creo el producto ${docRef.nombre}`};
 
     }catch(error){
       console.log(error);
@@ -122,8 +116,6 @@ export const useProductsStore = defineStore('products', () => {
       
     }
   };
-
-  
 
   return { products, categories, isLoading, errorMsg, productByName, getProductById, fetchProducts, createProduct, deleteProduct, updateProduct, productByCategory }
 })
