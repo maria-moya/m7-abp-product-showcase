@@ -177,7 +177,6 @@ onMounted(async () => {
       return alert(respuesta.error)
     }
 
-    alert(respuesta.success)
   } catch {}
 })
 </script>
