@@ -1,10 +1,10 @@
 <template>
   <div>
+    <HeaderComp>Favoritos</HeaderComp>
 
     <div class="container py-5">
-      <HeaderComp>Favoritos</HeaderComp>
-
-      <div class="mb-5 py-4">
+      
+      <div class="mb-5 py-2">
         <BreadcrumbComp />
       </div>
       
@@ -14,7 +14,7 @@
       
       <div v-else class="alert alert-secondary text-center text-estilo">
         <p class="mb-0">Aún no has agregado ningún producto a tus favoritos.</p>
-        <RouterLink to="/" class="btn btn-primary mt-3">Volver al Catálogo</RouterLink>
+        <RouterLink to="/product" class="btn btn-primary mt-3">Volver al Catálogo</RouterLink>
       </div>
     </div>
 

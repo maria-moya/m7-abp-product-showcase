@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-withe sticky-top py-3">
+    <nav class="navbar navbar-expand-lg sticky-top py-3 bg-body border-bottom">
       <div class="container position-relative justify-content-center">
         
         <div class="position-absolute start-0 d-none d-md-block">
@@ -82,27 +82,33 @@ async function onLogout() {
 <style scoped lang="css">
 .nav-link-custom{
   text-decoration: none;
-  color: #555;
+  color: var(--bs-body-color);
+  opacity: 0.7;
   font-size: 1rem;
   letter-spacing: 1px;
   text-transform: capitalize;
-  transition: color 0.3s;
+  transition: all 0.3s;
 }
 
-.nav-lik-custom:hover{
+/* .nav-lik-custom:hover{
   color: #000;
+} */
+
+.nav-link-custom:hover, .router-link-active {
+  color: var(--bs-primary) !important;
+  opacity: 1;
 }
 
 .user-link{
   text-decoration: none;
-  color: #666;
+  color: var(--bs-secondary-color);
   font-size: 0.75rem;
   display: flex;
   align-items: center;
 }
 
-.router-link-active{
+/* .router-link-active{
   font-weight: 500;
   color: #000 !important;
-}
+} */
 </style>

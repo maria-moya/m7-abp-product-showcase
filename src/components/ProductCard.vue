@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="product-card h-100 position-relative text-center d-flex flex-column">
+    <div class="product-card h-100 position-relative text-center d-flex flex-column border-0">
       <button
         v-if="isAuth"
         class="btn-fav position-absolute top-0 end-0 m-3 border-0 bg-transparent"
@@ -168,13 +168,14 @@ watch(cantidad, (nuevoValor) => {
 <style scoped lang="css">
 .product-card {
   transition: transform 0.2s ease-in-out;
-  background-color: #fff;
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
   padding-bottom: 1rem;
 }
 
 .img-container {
   overflow: hidden;
-  background-color: #f8f9fa;
+  background-color: var(--bs-tertiary-bg);
 }
 
 .img-container img {
@@ -185,7 +186,7 @@ watch(cantidad, (nuevoValor) => {
 
 .product-title {
   font-size: 1.1rem;
-  color: #333;
+  color: var(--bs-body-color);
 }
 
 .quick-view {
@@ -209,18 +210,24 @@ watch(cantidad, (nuevoValor) => {
 }
 
 .btn-outline-dark {
-  border: 1px solid #333;
+  border: 1px solid var(--bs-border-color);
+  color: var(--bs-body-color);
   text-transform: none;
   font-weight: 300;
 }
 
 .btn-outline-dark:hover {
-  background-color: #333;
-  color: #fff;
+  background-color: var(--bs-body-color);
+  color: var(--bs-body-bg);
 }
 
 .quick-view {
   cursor: pointer;
+}
+
+:deep(.v-card) {
+  background-color: var(--bs-body-bg) !important;
+  color: var(--bs-body-color) !important;
 }
 
 :deep(.v-overlay__content) {

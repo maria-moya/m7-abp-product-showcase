@@ -8,7 +8,7 @@
 
     <main class="container py-5">
 
-      <section class="novedades-section py-5 position-relative">
+      <section class="novedades-section py-5 position-relative border-0">
         <div class="Text-center mb-5">
           <h2 class="section-title">Recien agregados</h2>
         </div>
@@ -79,11 +79,11 @@ onMounted(async () => {
   font-family: 'Outfit', sans-serif;
   text-transform: uppercase;
   letter-spacing: 3px;
-  color: #444;
+  color: var(--bs-body-color);
 }
 
 .novedades-section {
-  background-color: #fff;
+  background-color: var(--bs-body-bg);
 }
 
 .scroll-horizontal-container {
@@ -108,8 +108,9 @@ onMounted(async () => {
   top: 40%;
   transform: translateY(-50%);
   z-index: 10;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid #eee;
+  background: var(--bs-body-bg);
+  color: var(--bs-body-color);
+  border: 1px solid var(--bs-border-color);
   border-radius: 50%;
   width: 45px;
   height: 45px;

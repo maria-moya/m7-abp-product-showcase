@@ -1,8 +1,8 @@
 <template>
   <div>
-    <header class="header-container border-bottom bg-white">
+    <header class="header-container border-bottom bg-body-tertiary">
       <div class="container text-center py-5">
-        <h1 class="brand-title">
+        <h1 class="brand-title text-body">
           <slot></slot>
         </h1>
       </div>
@@ -20,7 +20,7 @@
   font-weight: 300;
   letter-spacing: 8px;
   font-size: 2.8rem;
-  color: #2c2c2c;
+  color: var(--bs-body-color);
   margin: 0;
 }
 
