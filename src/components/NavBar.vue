@@ -114,5 +114,14 @@ async function onLogout() {
   align-items: center;
 }
 
+.expanding-search {
+  transition: width 0.3s ease;
+  width: 250px;
+}
 
+@media (max-width: 600px) {
+  .expanding-search {
+    width: 150px;
+  }
+}
 </style>

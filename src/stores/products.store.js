@@ -68,7 +68,7 @@ export const useProductsStore = defineStore('products', () => {
 
       products.value.push({ id: docRef.id, ...producto });
 
-      return {success: `Se creo el producto ${docRef.nombre}`};
+      return {success: `Se creo el producto ${producto.nombre}`};
 
     }catch(error){
       console.log(error);

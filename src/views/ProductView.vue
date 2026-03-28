@@ -22,7 +22,7 @@
           <div class="col-md-6">
             <div class="input-group input-group-sm">
               <span class="input-group-text bg-transparent border-end-0">
-                <v-icon size="x-small">mid-magnify</v-icon>
+                <i class="bi bi-search"></i>
               </span>
               <input
                 type="text"

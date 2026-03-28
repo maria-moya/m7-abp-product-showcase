@@ -20,7 +20,11 @@
 
         <div class="col-6">
           <label class="form-label">Precio:</label>
-          <input type="number" class="form-control" required v-model="producto.precio" />
+          <div class="input-group">
+            <span class="input-group-text">$</span>
+            <input type="text" class="form-control" required :value="formattedPrecio" @input="onPrecioInput" placeholder="0"/>
+          </div>
+          <small class="text-muted">Valor numérico: {{ producto.precio }}</small>
         </div>
 
         <div class="col-6">
@@ -69,13 +73,13 @@
 
 <script setup>
 import HeaderComp from '@/components/HeaderComp.vue'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import { useProductsStore } from '@/stores/products.store.js'
 import ProductsList from '@/components/AdminProductTable.vue'
 import Swal from 'sweetalert2'
 import BreadcrumbComp from '@/components/BreadcrumbComp.vue'
 
-const productsStore = useProductsStore()
+const productsStore = useProductsStore();
 
 const producto = ref({
   id: '',
@@ -178,7 +182,20 @@ onMounted(async () => {
     }
 
   } catch {}
-})
+});
+
+const formattedPrecio = computed(() => {
+  if (producto.value.precio === 0 || !producto.value.precio) return "";
+  return new Intl.NumberFormat('es-CL').format(producto.value.precio); 
+});
+
+const onPrecioInput = (e) => {
+  let value = e.target.value;
+  let num = value.replace(/\D/g, "");
+  
+  producto.value.precio = num ? parseInt(num, 10) : 0;
+};
+
 </script>
 
 <style scoped lang="css">
