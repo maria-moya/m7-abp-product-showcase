@@ -3,10 +3,10 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb mb-0">
         <li v-for="(crumb, index) in crumbs" :key="index" class="breadcrumb-item">
-          <span v-if="index === crumbs.length - 1" class="active text-dark fw-bold">
+          <span v-if="index === crumbs.length - 1" class="active-crumb fw-bold">
             {{ crumb.label }}
           </span>
-          <RouterLink v-else :to="crumb.path" class="text-decoration-none text-muted">
+          <RouterLink v-else :to="crumb.path" class="text-decoration-none crumb-link">
             {{ crumb.label }}
           </RouterLink>
         </li>
@@ -54,17 +54,27 @@ const crumbs = computed(() => {
   background: transparent;
   padding: 0;
 }
+
 .breadcrumb-item + .breadcrumb-item::before {
   content: "›"; 
-  color: #999;
+  color: var(--bs-secondary-color);
 }
 
 .breadcrumb-item {
   text-transform: capitalize;
 }
 
-.active {
+.crumb-link {
+  color: var(--bs-secondary-color);
+  transition: color 0.3s;
+}
+
+.crumb-link:hover {
+  color: var(--bs-primary);
+}
+
+.active-crumb {
   letter-spacing: 1px;
-  color: #222 !important;
+  color: var(--bs-body-color);
 }
 </style>
