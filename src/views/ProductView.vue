@@ -2,12 +2,12 @@
   <div>
     <HeaderComp>Productos</HeaderComp>
 
-    <main class="container py-4">
+    <main class="container py-4 ">
       <section>
         
         <BreadcrumbComp/>
 
-        <div class="d-flex justify-content-center flex-wrap gap-2 mb-4">
+        <div class="d-flex justify-content-center flex-wrap gap-2 mb-4 py-4">
           <RouterLink
             v-for="category in productStore.categories"
             :key="category"

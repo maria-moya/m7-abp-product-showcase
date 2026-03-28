@@ -1,30 +1,22 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg sticky-top py-3 bg-body border-bottom">
-      <div class="container position-relative justify-content-center">
-        
-        <div class="position-absolute start-0 d-none d-md-block">
-          <v-btn icon="mdi-magnify" variant="text" density="comfortable" color="grey-darken-1"></v-btn>
-        </div>
+    <nav class="navbar navbar-expand-lg py-3 bg-body-tertiary border-bottom">
+      <div class="container-fluid d-flex align-items-center justify-content-between">
+       
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-        <div class="d-flex gap-4 align-center">
-          <RouterLink to="/" class="nav-link-custom">Inicio</RouterLink>
-          <RouterLink to="/about" class="nav-link-custom">Nosotros</RouterLink>
-          <RouterLink to="/product" class="nav-link-custom">Productos</RouterLink>
-          <RouterLink v-if="isAdmin" :to="{ name: 'crud-products' }" class="nav-link-custom">Crud productos</RouterLink>
-          <RouterLink v-if="isAuth" to="/favorites" class="nav-link-custom ">Favoritos</RouterLink>
-        </div>
-
-        <div class="position-absolute end-0 d-flex align-center gap-2">
+        <div class="d-flex align-center gap-1 gap-md-2 ms-auto order-lg-last">
           <template v-if="!isAuth">
-            <RouterLink to="/login" class="user-link">
+            <RouterLink to="/login" class="user-link d-none d-sm-flex">
               <v-icon size="small" class="me-1">mdi-account-outline</v-icon>
               <span>Inicia sesión</span>
             </RouterLink>
           </template>
 
           <template v-else>
-            <span class="text-caption me-2 d-none d-sm-inline">Hola, {{ displayName }}</span>
+            <span class="text-caption me-2 d-none d-sm-inline">Hola, {{ displayName }}</span> <!--d-sm-inline-->
             <v-btn icon="mdi-logout-variant" variant="text" size="small" @click="onLogout"></v-btn>
           </template>
 
@@ -41,41 +33,60 @@
           </v-btn>
         </div>
 
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup" ref="navbarCollapse">
+          <div class="navbar-nav  d-lg-flex gap-4 align-center">
+
+            <div class="d-lg-block">
+              <v-btn icon="mdi-magnify" variant="text" density="comfortable" color="grey-darken-1"></v-btn>
+            </div>
+
+            <RouterLink to="/" class="nav-link-custom" @click="closeMenu">Inicio</RouterLink>
+            <RouterLink to="/about" class="nav-link-custom" @click="closeMenu">Nosotros</RouterLink>
+            <RouterLink to="/product" class="nav-link-custom" @click="closeMenu">Productos</RouterLink>
+            <RouterLink v-if="isAdmin" :to="{ name: 'crud-products' }" class="nav-link-custom" @click="closeMenu">Crud productos</RouterLink>
+            <RouterLink v-if="isAuth" to="/favorites" class="nav-link-custom" @click="closeMenu">Favoritos</RouterLink>
+      
+          </div>
+        </div>
+
       </div>
     </nav>
-  
   </div>
 </template>
 
 <script setup>
 import { RouterLink, RouterView, useRouter } from 'vue-router'
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import { useUserStore } from '@/stores/user.store.js'
 import { logout } from '@/services/auth.js'
 import { useThemeStore } from '@/stores/theme.store'
 
 const themeStore = useThemeStore();
+const router = useRouter();
+const userStore = useUserStore();
 
-const router = useRouter()
-const userStore = useUserStore()
+const navbarCollapse = ref(null);
 
 const isAuth = computed(() => userStore.isAuthenticated)
 const isAdmin = computed(() => userStore.user?.role === 'admin')
 
+const closeMenu = () => {
+  if (navbarCollapse.value?.classList.contains('show')) {
+    const bootstrap = window.bootstrap
+    const bsCollapse = new bootstrap.Collapse(navbarCollapse.value)
+    bsCollapse.hide()
+  }
+}
+
 const displayName = computed(() => {
-  const u = userStore.user
-  if (!u) return ''
-  return `${u.firstname || ''} ${u.lastname || ''}`.trim() || u.email
+  const u = userStore.user;
+  return u ? (`${u.firstname || ''} ${u.lastname || ''}`.trim() || u.email) : '';
 })
 
 async function onLogout() {
-  try {
     await logout()
     userStore.clearUser()
     router.push({ name: 'login' })
-  } catch (e) {
-    console.error(e)
-  }
 }
 </script>
 
@@ -90,10 +101,6 @@ async function onLogout() {
   transition: all 0.3s;
 }
 
-/* .nav-lik-custom:hover{
-  color: #000;
-} */
-
 .nav-link-custom:hover, .router-link-active {
   color: var(--bs-primary) !important;
   opacity: 1;
@@ -107,8 +114,5 @@ async function onLogout() {
   align-items: center;
 }
 
-/* .router-link-active{
-  font-weight: 500;
-  color: #000 !important;
-} */
+
 </style>

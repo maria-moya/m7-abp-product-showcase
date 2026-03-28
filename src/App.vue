@@ -1,10 +1,13 @@
 <template>
 
-  <NavBar/>
 
-  <RouterView />
+    <NavBar /> 
 
-  <FooterComp/>
+      <RouterView />
+
+
+    <FooterComp />
+
 
 </template>
 
@@ -30,4 +33,6 @@ body {
 .text-muted {
   color: var(--bs-secondary-color) !important;
 }
+
+
 </style>
