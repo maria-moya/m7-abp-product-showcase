@@ -1,0 +1,1 @@
+import{_ as t,c as o,a as n,r as s,o as a}from"./index-DqUn4kRw.js";const c={};function r(_,i){const e=s("v-empty-state");return a(),o("div",null,[n(e,{headline:"Ups, 404",title:"Página no encontrada",text:"The page you were looking for does not exist",image:"https://vuetifyjs.b-cdn.net/docs/images/logos/v.png"})])}const l=t(c,[["render",r]]);export{l as default};

@@ -1,0 +1,1 @@
+import{B as i,h as r,i as a}from"./index-DqUn4kRw.js";const v=i("favorites",()=>{const e=r([]),s=a(()=>t=>e.value.includes(t));return{favoriteItems:e,isFavorite:s,toggleFavorite:t=>{const o=e.value.indexOf(t);o===-1?e.value.push(t):e.value.splice(o,1)}}});export{v as u};
