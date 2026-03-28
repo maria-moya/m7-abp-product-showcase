@@ -1,10 +1,10 @@
 <template>
-  <div class="container mt-5">
+  <div class="container mt-5 ">
     <div class="mb-5">
       <BreadcrumbComp />
     </div>
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-center text-decoration">
       <div class="col-md-5">
         <div class="card p-4">
           <h2 class="mb-4 text-center">Iniciar sesión</h2>
@@ -77,5 +77,10 @@ async function onReset() {
 <style scoped>
 .login-container {
   display: none;
+}
+
+.text-decoration, .btn{
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: 1.5px;
 }
 </style>

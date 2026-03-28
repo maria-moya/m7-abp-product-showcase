@@ -25,7 +25,7 @@
         </span>
 
         <h5 class="product-title fw-light mb-1">{{ producto.nombre }}</h5>
-        <p class="product-price fw-normal">{{ producto.precio }}</p>
+        <p class="product-price fw-normal">{{ formatPrice(producto.precio) }}</p>
       </div>
 
       <button v-if="isProductView" class="btn btn-dark rounded-0 w-100 py-1 mb-2 mt-auto">
@@ -37,7 +37,7 @@
       <button class="btn btn-outline-dark rounded-0 w-100 py-1 mt-auto">Agregar al carrito</button>
     </div>
 
-    <v-dialog v-model="showQuickView" max-width="900">
+    <v-dialog v-model="showQuickView" max-width="900" class="diseno-texto">
       <v-card class="rounded-0">
         <div class="container-fluid p-0">
           <div class="row g-0">
@@ -56,7 +56,7 @@
                 class="btn-close position-absolute top-0 end-0 m-3 shadow-none"
               ></button>
               <h2 class="fw-light mb-2">{{ producto.nombre }}</h2>
-              <p class="fs-4 mb-4">${{ producto.precio }}</p>
+              <p class="fs-4 mb-4">{{ formatPrice(producto.precio) }}</p>
 
               <div class="mb-4">
                 <span class="small text-muted" :class="{ 'text-danger': producto.stock < 5 }">
@@ -128,6 +128,11 @@ const props = defineProps(['producto'])
 const route = useRoute()
 const favoritesStore = useFavoritesStore()
 const userStore = useUserStore()
+
+
+const formatPrice = (price) => {
+  return price?.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' }) || '$0';
+};
 
 const isProductView = computed(()=> {
   return ['product', 'category', 'favorites']. includes(route.name);
@@ -249,5 +254,10 @@ watch(cantidad, (nuevoValor) => {
 .btn-dark:hover {
   opacity: 0.8;
   background-color: #000;
+}
+
+.diseno-texto{
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: 1.5px;
 }
 </style>

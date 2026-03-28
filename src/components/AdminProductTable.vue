@@ -21,7 +21,7 @@
           </td>
           <td>{{ producto.categoria }}</td>
           <td>{{ producto.stock }}</td>
-          <td>{{ producto.precio }}</td>
+          <td>{{ formatPrice(producto.precio) }}</td>
           <td>
             <button class="btn btn-warning" @click="emit('modoEdicion', producto.id)">
               <i class="bi bi-pencil-square"></i>
@@ -46,6 +46,10 @@ const productsStore = useProductsStore()
 const emit = defineEmits(['modoEdicion'])
 
 defineProps(['productos'])
+
+const formatPrice = (price) => {
+  return price?.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' }) || '$0';
+};
 
 const eliminar = async (id, nombre) => {
   try {
