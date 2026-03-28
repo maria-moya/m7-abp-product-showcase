@@ -10,6 +10,7 @@ export default defineConfig({
     vue(),
     vueDevTools(),
   ],
+  base: '/m7-abp-product-showcase/',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
