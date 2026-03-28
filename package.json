@@ -6,11 +6,12 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:firebase": "vite build --config vite.config.firebase.js",
+    "deploy:gh": "npm run build && gh-pages -d dist",
+    "deploy:firebase": "npm run build:firebase && firebase deploy --only hosting",
     "preview": "vite preview",
     "format": "prettier --write --experimental-cli src/",
-    "test:unit": "vitest",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "test:unit": "vitest"
   },
   "dependencies": {
     "@fontsource/roboto": "^5.2.10",
