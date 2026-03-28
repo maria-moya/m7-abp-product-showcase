@@ -9,9 +9,9 @@
 
         <div class="d-flex align-center gap-1 gap-md-2 ms-auto order-lg-last">
           <template v-if="!isAuth">
-            <RouterLink to="/login" class="user-link d-none d-sm-flex">
-              <v-icon size="small" class="me-1">mdi-account-outline</v-icon>
-              <span>Inicia sesión</span>
+            <RouterLink to="/login" class="user-link">
+              <v-icon :class="{'me-1': true}">mdi-account-outline</v-icon>
+              <span class="d-none d-md-inline">Inicia sesión</span>
             </RouterLink>
           </template>
 
@@ -86,7 +86,7 @@ const displayName = computed(() => {
 async function onLogout() {
     await logout()
     userStore.clearUser()
-    router.push({ name: 'login' })
+    router.push({ name: 'home' })
 }
 </script>
 
