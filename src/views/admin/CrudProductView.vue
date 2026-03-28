@@ -6,8 +6,8 @@
   <main class="container">
     <BreadcrumbComp/>
 
-    <section class="py-3">
-      <form class="row justify-content-center w-50 mx-auto" @submit.prevent="createOrUpdate">
+    <section class="py-5">
+      <form class="row justify-content-center w-100 w-md-75 w-lg-50 mx-auto" @submit.prevent="createOrUpdate">
         <div class="col-12">
           <label class="form-label">Nombre:</label>
           <input type="text" class="form-control" required v-model="producto.nombre" />
@@ -61,12 +61,11 @@
 
     <section class="py-4">
       <h2 class="text-center mb-5 py-2">Listado de productos</h2>
-      <ProductsList
-        v-if="productsStore.products.length > 0"
-        :productos="productsStore.products"
-        @modoEdicion="edicionProducto"
-      />
-      <p v-else>No hay productos para mostrar.</p>
+      <div class="table-responsive">
+        <ProductsList v-if="productsStore.products.length > 0" :productos="productsStore.products" @modoEdicion="edicionProducto"/>
+        <p v-else>No hay productos para mostrar.</p>
+      </div>
+      
     </section>
   </main>
 </template>
