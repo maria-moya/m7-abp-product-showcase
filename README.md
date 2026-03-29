@@ -66,17 +66,20 @@ La aplicación estará disponible en `http://localhost:5173`.
 ## Testing
 
 - **Pruebas Unitarias**: Ejecutar con `npm run test:unit` para verificar la lógica de componentes y stores.
-- **E2E Testing**: Abrir Cypress con el comando correspondiente (si está configurado) para pruebas de flujo de usuario.
+- **E2E Testing**: Abrir Cypress con el comando correspondiente para pruebas de flujo de usuario.
 
-## Despliegue en Firebase
-Este proyecto está configurado para ser desplegado en **Firebase Hosting**.
+## Despliegue
+Este proyecto cuenta con dos opciones de despliegue configuradas:
+
+### Opción A: GitHub Pages
+Utiliza el archivo de configuración base y el Router en modo Hash.
 ```bash
-npm run build
-firebase deploy
+npm run deploy:gh
 ```
 
-## Despliegue en GitHub
-Este proyecto está configurado para ser desplegado en **GitHub Pages**.
+### Opción B: Firebase Hosting
+Utiliza la configuración específica en `vite.config.firebase.js` y el historial limpio.
 ```bash
-npm run deploy
+npm run deploy:firebase
 ```
+
