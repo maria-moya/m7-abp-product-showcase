@@ -66,7 +66,7 @@ La aplicación estará disponible en `http://localhost:5173`.
 ## Testing
 
 - **Pruebas Unitarias**: Ejecutar con `npm run test:unit` para verificar la lógica de componentes y stores.
-- **E2E Testing**: Abrir Cypress con el comando correspondiente para pruebas de flujo de usuario.
+- **E2E Testing**: Ejecutar Cypress con `npx cypress open` el comando correspondiente para pruebas de flujo de usuario.
 
 ## Despliegue
 Este proyecto cuenta con dos opciones de despliegue configuradas:

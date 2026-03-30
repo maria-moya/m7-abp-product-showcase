@@ -1,8 +1,18 @@
 describe('Filtro de productos', () => {
   it('filtra exitosamente un producto por nombre', () => {
-    cy.visit('http://localhost:5173/') // Asegurate de correr en este puerto tu vite app.
-    // Simulamos tener un producto llamado "Silla" en la db
-    cy.get('input[type="text"]').type('Silla')
-    cy.get('.card-title').should('contain', 'Silla')
+    // 1. Visitar la Home 
+    cy.visit('http://localhost:5173/m7-abp-product-showcase/') 
+
+    // 2. Navegar a Productos 
+    cy.contains('product').click() 
+
+    // 3. ¡ESPERA AQUÍ! Verifica que cargó el título de la página
+    cy.contains('Productos').should('be.visible') 
+
+    // 4. Ahora sí, busca el input. Ya es seguro.
+    cy.get('input').first().type('Silla')
+
+    // 5. Verificar el resultado
+    cy.contains('Silla').should('be.visible')
   })
 })

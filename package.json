@@ -23,6 +23,7 @@
     "vuetify": "^4.0.2"
   },
   "devDependencies": {
+    "@pinia/testing": "^1.0.3",
     "@vitejs/plugin-vue": "^6.0.4",
     "@vue/test-utils": "^2.4.6",
     "cypress": "^15.12.0",
