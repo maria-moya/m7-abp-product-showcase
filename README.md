@@ -2,10 +2,10 @@
 
 Una aplicación de catálogo de productos construida con **Vue 3**, diseñada para ofrecer una experiencia de usuario fluida, reactiva y visualmente atractiva.
 
-## Repositorios
+## Despliegues
 
     - GitHub: https://maria-moya.github.io/m7-abp-product-showcase/
-    -Firebase: product-showcase-e8e37.web.app
+    - Firebase: product-showcase-e8e37.web.app
 
 ## Características Principales
 
